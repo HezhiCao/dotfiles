@@ -119,3 +119,7 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 " Improve enter inside bracket `<> {} [] ()` by add new empty line below and place cursor to it.
 " inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
 " \   : \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" alias of write and quit
+nmap fw :w<CR>
+nmap fq :q<CR>
