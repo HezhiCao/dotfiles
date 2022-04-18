@@ -1,5 +1,6 @@
 ---@diagnostic disable:undefined-global
 
+local math_s = require("xx.snippets.utils").math_s
 require("luasnip").filetype_extend("vimwiki", { "tex" })
 
 local snippets = {
@@ -39,6 +40,25 @@ local snippets = {
       }
     )
   ),
+  s("mal", 
+    fmta(
+      [[
+      {{$%align%
+      <> &= <> \\
+      &= <>
+      }}$
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+      }
+    )
+  ),
+  s("nll", t "<br>"),
+  math_s({trig = "mqa", wordTrig = false}, {
+    t("\\quad "),
+  }),
 }
 
 return snippets

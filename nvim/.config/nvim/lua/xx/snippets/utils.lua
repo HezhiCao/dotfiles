@@ -46,6 +46,8 @@ function M.math_s(...)
         end
       end
       return false
+    elseif vim.bo.filetype == "norg" then
+      return false
     end
   end
   local params = {...}

@@ -123,3 +123,4 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 " alias of write and quit
 nmap fw :w<CR>
 nmap fq :q<CR>
+nmap fqq :q!<CR>

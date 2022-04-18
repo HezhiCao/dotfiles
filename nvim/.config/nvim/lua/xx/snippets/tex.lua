@@ -24,7 +24,19 @@ local snippets = {
     t("\\mathcal{"),
     i(1),
     t("}")
-  })
+  }),
+  math_s({trig = "sumul", wordTrig = false}, {
+    t("\\overset{"),
+    i(1),
+    t("}{\\underset{"),
+    i(2),
+    t("}{\\sum}}"),
+  }),
+  math_s({trig = "suml", wordTrig = false}, {
+    t("\\underset{"),
+    i(1),
+    t("}{\\sum}"),
+  }),
 }
 
 local auto_backslash = function(triggers)
@@ -56,7 +68,8 @@ local auto_snippets = {
   math_s("!=", t "\\neq "),
   math_s("**", t "\\times "),
   math_s("ooo", t "\\infty"),
-  math_s("ooo", t "\\infty"),
+  math_s({trig = "mll", wordTrig = false}, {t("_{"),i(1), t("}")}),
+  math_s({trig = "muu", wordTrig = false}, {t("^{"),i(1), t("}")}),
   math_s(
     "sq",
     fmta(
