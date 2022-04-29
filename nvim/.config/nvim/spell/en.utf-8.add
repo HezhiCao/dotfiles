@@ -42,3 +42,5 @@ PPO
 TRPO
 gdb
 ptrace
+#uto_attribs/!
+auto_attribs/!

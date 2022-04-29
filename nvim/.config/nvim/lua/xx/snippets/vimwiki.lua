@@ -59,6 +59,17 @@ local snippets = {
   math_s({trig = "mqa", wordTrig = false}, {
     t("\\quad "),
   }),
+  s("$",
+  fmta(
+      [[
+      $<>$<>
+      ]],
+      {
+        i(1),
+        i(2),
+      }
+    )
+  ),
 }
 
 return snippets

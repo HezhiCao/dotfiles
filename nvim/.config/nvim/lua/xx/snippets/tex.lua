@@ -186,8 +186,8 @@ local auto_snippets = {
     "equiv",
     "sup",
     "inf",
-    "max",
-    "min",
+    -- "max",
+    -- "min",
     "arg",
   },
 }
