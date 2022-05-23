@@ -1,4 +1,5 @@
 vim.g.vimtex_quickfix_mode = 0
+-- vim.opt_local.spell = true
 
 vim.api.nvim_buf_set_keymap(0, '', 'K', '<Plug>(vimtex-doc-package)', { noremap = false })
 

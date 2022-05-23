@@ -190,6 +190,26 @@ local auto_snippets = {
     -- "min",
     "arg",
   },
+  s("tb",
+  fmta(
+      [[
+      \textbf{<>}
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s("tt",
+  fmta(
+      [[
+      \textit{<>}
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
 }
 
 return snippets, auto_snippets
