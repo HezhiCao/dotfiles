@@ -19,10 +19,22 @@ alias jbf="j -b -I"
 alias jh="j -I -t ."
 alias jc="j -c"
 alias dt="gio trash"
+
+# alias l='exa -lbF'
+# alias ls='ls'
+# alias ll='exa -la'
+# alias lx='exa -lbhmua@'
+
+
 if [[ -x "$(command -v exa)" ]]; then
     alias l="exa --icons"
-    alias ll"=exa -l --icons"
-    alias la="exa -al --icons"
+    alias ll='exa -la'
+    alias la='exa -lhmua'
+    # alias ll"=exa -l --icons"
+    # alias la="exa -al --icons"
+    alias llm='ll --sort=modified'
+    alias tree='exa -tree'
+    alias lS='exa -1'
 fi
 
 # suffix aliases

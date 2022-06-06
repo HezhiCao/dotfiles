@@ -5,6 +5,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $real
 zstyle ':completion:*' format '[%d]'
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:git-checkout:*' sort false
 
 fzf-choose-dirs-widget() {
     local selected_dir
