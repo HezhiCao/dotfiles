@@ -15,6 +15,7 @@ local colors = {
   inactivegray = "#707A8C",
   transparent = "NONE",
 }
+
 local ayu_mirage = {
   normal = {
     a = { bg = colors.green, fg = colors.black, gui = "bold" },
@@ -56,15 +57,14 @@ local ayu_mirage = {
 
 local symbols = {
   read_only = "",
-  lsp_status = "  ",
   git_branch = " ",
   git_merge = " ",
   normal_diff = " ",
   treesitter_status = " ",
   explorer = " ",
   tree = " ",
-  mode = " ",
-  ruler = "",
+  mode = "🥷", -- 
+  ruler = "", -- 📏
   err = vim.env.KITTY_WINDOW_ID and "理" or "ﲅ ",
   warn = vim.env.KITTY_WINDOW_ID and " " or "ﲍ ",
   info = vim.env.KITTY_WINDOW_ID and " " or "ﳃ ",
@@ -72,7 +72,12 @@ local symbols = {
   catkin_package = vim.env.KITTY_WINDOW_ID and " " or "ﲎ ",
 }
 
-local lsp_progress = require('lsp-status').status_progress
+local gps = require "nvim-gps"
+gps.setup {
+  icons = {
+    ["function-name"] = " ",
+  },
+}
 
 local hide_when_narrow = function(width)
   return function()
@@ -105,18 +110,9 @@ local read_only = function()
   end
 end
 
-local lsp_status = function()
-  local status = lsp_progress()
-  if status and #status > 0 then
-    return symbols.lsp_status .. status
-  else
-    return ""
-  end
-end
-
 local treesitter_status = function()
   local status = vim.fn["nvim_treesitter#statusline"] {
-    indicator_size = 100,
+    indicator_size = 200,
     type_patterns = { "class", "function", "method" },
   }
   if status and status ~= vim.NIL and #status > 0 then
@@ -184,7 +180,7 @@ require("lualine").setup {
       {
         git_diff,
         padding = { left = 0 },
-        condition = hide_when_narrow(140),
+        cond = hide_when_narrow(140),
       },
     },
     lualine_c = {
@@ -194,16 +190,19 @@ require("lualine").setup {
         path = 1,
       },
       read_only,
-      lsp_status,
+      -- {
+      --   treesitter_status,
+      --   cond = hide_when_narrow(120),
+      -- },
       {
-        treesitter_status,
-        condition = hide_when_narrow(120),
+        gps.get_location,
+        cond = gps.is_available,
       },
     },
     lualine_x = {
       {
         ros_package,
-        condition = hide_when_narrow(140),
+        cond = hide_when_narrow(140),
       },
       "filetype",
     },

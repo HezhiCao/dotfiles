@@ -8,10 +8,8 @@ return require("packer").startup {
     ---
     --- LSP & Autocompletion
     ---
-    -- use { 'neoclide/coc.nvim, branch = 'release' }
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
-    use "nvim-lua/lsp-status.nvim"
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
@@ -23,7 +21,6 @@ return require("packer").startup {
     use "againxx/cmp-katex"
     use "andersevenrud/cmp-tmux"
     use "hrsh7th/nvim-cmp"
-    -- use 'quangnguyen30192/cmp-nvim-ultisnips'
     use "saadparwaiz1/cmp_luasnip"
     use "onsails/lspkind-nvim"
     use "ray-x/lsp_signature.nvim"
@@ -32,11 +29,19 @@ return require("packer").startup {
       "simrat39/symbols-outline.nvim",
       cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
     }
+    use "j-hui/fidget.nvim" -- UI for lsp progress
+    use {
+      "filipdutescu/renamer.nvim",
+      branch = "master",
+      requires = { { "nvim-lua/plenary.nvim" } },
+      config = function()
+        require("renamer").setup {}
+      end,
+    }
 
     ---
     --- Debugger
     ---
-    -- use 'puremourning/vimspector'
     use "mfussenegger/nvim-dap"
     use "mfussenegger/nvim-dap-python"
     use { "rcarriga/nvim-dap-ui", requires = "mfussenegger/nvim-dap" }
@@ -131,6 +136,10 @@ return require("packer").startup {
         vim.notify = require "notify"
       end,
     }
+    use {
+      "SmiteshP/nvim-gps", -- statusline component that shows current scope
+      requires = "nvim-treesitter/nvim-treesitter",
+    }
 
     ---
     --- Start Screen & Session
@@ -154,11 +163,7 @@ return require("packer").startup {
     use {
       "folke/which-key.nvim",
       config = function()
-        require("which-key").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
+        require("which-key").setup {}
       end,
     }
 
@@ -169,11 +174,9 @@ return require("packer").startup {
       "nvim-telescope/telescope.nvim",
       requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
     }
-    -- use 'fannheyward/telescope-coc.nvim'
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use "nvim-telescope/telescope-fzf-writer.nvim"
     use "GustavoKatel/telescope-asynctasks.nvim"
-    -- use 'fhill2/telescope-ultisnips.nvim'
     use {
       "benfowler/telescope-luasnip.nvim",
       module = "telescope._extensions.luasnip",
@@ -240,7 +243,7 @@ return require("packer").startup {
     use {
       "numToStr/Comment.nvim",
       config = function()
-        require("Comment").setup()
+        require("Comment").setup {}
       end,
     }
     use "luochen1990/rainbow"
@@ -249,7 +252,6 @@ return require("packer").startup {
     ---
     --- Snippets
     ---
-    -- use 'SirVer/ultisnips'
     use "L3MON4D3/LuaSnip"
     use "againxx/vim-snippets"
 
@@ -270,6 +272,13 @@ return require("packer").startup {
     --- Rust
     ---
     use "simrat39/rust-tools.nvim"
+    use { -- managing crates.io dependencies
+      "saecki/crates.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("crates").setup()
+      end,
+    }
 
     ---
     --- OpenGL
@@ -467,6 +476,12 @@ return require("packer").startup {
     }
     use "voldikss/vim-translator"
     use {
+      "chentoast/marks.nvim",
+      config = function()
+        require("marks").setup()
+      end,
+    }
+    use {
       "AckslD/nvim-neoclip.lua",
       module = "neoclip",
       requires = {
@@ -474,6 +489,7 @@ return require("packer").startup {
         { "nvim-telescope/telescope.nvim" },
       },
     }
+    use 'lewis6991/impatient.nvim' -- speed up startup time
 
     ---
     --- Training Vim
@@ -485,6 +501,14 @@ return require("packer").startup {
     ---
     use "milisims/nvim-luaref" -- add help reference for lua
     use "nanotee/luv-vimdocs" -- add help reference for luv
+
+    ---
+    --- Local plugins
+    ---
+    use {
+      "~/.config/nvim/locals/jieba-ci",
+      run = "cargo build --release",
+    }
   end,
   config = {
     profile = {

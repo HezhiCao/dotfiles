@@ -72,3 +72,5 @@ python3
 Extern
 const
 namespace
+subgoals
+BST

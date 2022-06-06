@@ -10,9 +10,6 @@ local has_lsp, lsp_installer_servers = pcall(require, "nvim-lsp-installer.server
 if not has_lsp then
   return
 end
-local lsp_status = require "lsp-status"
-lsp_status.config {}
-lsp_status.register_progress()
 
 local saga = require "lspsaga"
 saga.init_lsp_saga {
@@ -64,34 +61,40 @@ function vim.lsp.modified_formatexpr()
 end
 
 local show_documentation = function()
-  if vim.tbl_contains({ "vim", "lua" }, vim.bo.filetype) then
-    if vim.bo.filetype == "lua" and not vim.fn.expand("<cWORD>"):match "vim%." then
+  local filetype = vim.bo.filetype
+  if vim.tbl_contains({ "vim", "lua", "help" }, filetype) then
+    if filetype == "lua" and not vim.fn.expand("<cWORD>"):match "vim%." then
       require("lspsaga.hover").render_hover_doc()
     else
       vim.cmd(string.format("h %s", vim.fn.expand "<cword>"))
     end
-  elseif vim.tbl_contains({ "rust", "cpp" }, vim.bo.filetype) then
+  elseif vim.tbl_contains({ "rust", "cpp" }, filetype) then
     -- use rust-tools hover for extra code actions
     vim.lsp.buf.hover()
+  elseif filetype == "man" then
+    vim.cmd(string.format("Man %s", vim.fn.expand "<cword>"))
+  elseif vim.fn.expand "%:t" == "Cargo.toml" then
+    require("crates").show_popup()
   else
     require("lspsaga.hover").render_hover_doc()
   end
 end
 
+keymap.set("n", "K", show_documentation, opts)
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach_default = function(client, bufnr)
-  lsp_status.on_attach(client)
   require("illuminate").on_attach(client)
   require("lsp_signature").on_attach {
     hint_prefix = "🐯 ",
   }
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.modified_formatexpr()")
   end
-
-  keymap.set("n", "K", show_documentation, vim.tbl_extend("force", opts, { buffer = bufnr }))
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
   local success, wk = pcall(require, "which-key")
   if not success then
@@ -106,12 +109,15 @@ local on_attach_default = function(client, bufnr)
     l = { "<cmd>lua require('xx.telescope').lsp_implementations()<cr>", "Go to implementations" },
     r = { "<cmd>lua require('xx.telescope').lsp_references()<cr>", "Go to references" },
     y = { "<cmd>lua require('xx.telescope').lsp_type_definitions()<cr>", "Go to type definitions" },
-  }, { prefix = "g", buffer = vim.api.nvim_get_current_buf() })
+  }, {
+    prefix = "g",
+    buffer = vim.api.nvim_get_current_buf(),
+  })
 
   wk.register({
     r = {
-      n = { "<cmd>Lspsaga rename<cr>", "Rename symbol" },
-      f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format the whole file" },
+      n = { "<cmd>lua require('renamer').rename()<cr>", "Rename symbol" },
+      f = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format the whole file" },
     },
     d = {
       g = { "<cmd>lua require('xx.telescope').diagnostics{bufnr = 0}<cr>", "Current buffer diagnostics" },
@@ -122,15 +128,21 @@ local on_attach_default = function(client, bufnr)
       name = "+action",
       a = { "<cmd>Lspsaga code_action<cr>", "Action under cursor" },
     },
-  }, { prefix = "<leader>", buffer = vim.api.nvim_get_current_buf() })
+  }, {
+    prefix = "<leader>",
+    buffer = vim.api.nvim_get_current_buf(),
+  })
 
   wk.register({
     a = { ":<C-u>Lspsaga range_code_action<cr>", "Action for selected" },
-  }, { mode = "x", prefix = "<leader>" })
+    n = { "<cmd>lua require('renamer').rename()<cr>", "Rename symbol" },
+  }, {
+    mode = "x",
+    prefix = "<leader>",
+  })
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -228,6 +240,18 @@ end
 vim.g.symbols_outline = {
   width = 35,
   preview_bg_highlight = "NormalFloat",
+}
+
+require("fidget").setup {
+  text = {
+    spinner = "moon",
+  },
+  window = {
+    blend = 0,
+  },
+  fmt = {
+    stack_upwards = false,
+  },
 }
 
 -- https://github.com/tami5/lspsaga.nvim/issues/89
