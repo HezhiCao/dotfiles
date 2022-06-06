@@ -1,4 +1,4 @@
-vim.opt_local.wrap = false
+vim.opt_local.wrap = true
 vim.opt_local.spell = true
 -- Use vimwiki's folding method instead vim-markdown's
 vim.g.vim_markdown_folding_disabled = true

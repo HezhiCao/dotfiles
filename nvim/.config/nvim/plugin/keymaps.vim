@@ -124,3 +124,4 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 nmap fw :w<CR>
 nmap fq :q<CR>
 nmap fqq :q!<CR>
+nmap ml ddGp<C-o>zz
