@@ -147,7 +147,15 @@ api.nvim_create_autocmd("FileType", {
   group = other_filetypes,
   pattern = "toml",
   callback = function()
-    require("cmp").setup.buffer { sources = { { name = "crates" } } }
+    if vim.fn.expand "%:t" == "Cargo.toml" then
+      require("cmp").setup.buffer { sources = { { name = "crates" } } }
+      keymap.set("n", "K", function()
+        require("crates").show_popup()
+      end, {
+        buffer = api.nvim_get_current_buf(),
+        silent = true,
+      })
+    end
   end,
 })
 -- api.nvim_create_autocmd("FileType", {
@@ -179,6 +187,17 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = ros_filetype_detect,
   pattern = "*.srv",
   command = "set filetype=rossrv",
+})
+
+-- targets.vim
+-- disable using 'b' for multi targets
+api.nvim_create_autocmd({ "User" }, {
+  pattern = "targets#mappings#user",
+  callback = function()
+    vim.fn["targets#mappings#extend"] {
+      b = { pair = { { o = "(", c = ")" } } },
+    }
+  end,
 })
 
 -- defx file explorer, hijack netrw
