@@ -125,3 +125,4 @@ nmap fw :w<CR>
 nmap fq :q<CR>
 nmap fqq :q!<CR>
 nmap ml ddGp<C-o>zz
+nmap ' `

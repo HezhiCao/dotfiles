@@ -1,3 +1,4 @@
+require('jieba-ci').init()
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
 -- Use vimwiki's folding method instead vim-markdown's

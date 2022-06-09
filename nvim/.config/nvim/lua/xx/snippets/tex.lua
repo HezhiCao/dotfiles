@@ -25,6 +25,11 @@ local snippets = {
     i(1),
     t("}")
   }),
+  math_s({trig = "mbf", wordTrig = false}, {
+    t("\\mathbf{"),
+    i(1),
+    t("}")
+  }),
   math_s({trig = "sumul", wordTrig = false}, {
     t("\\overset{"),
     i(1),
@@ -68,6 +73,12 @@ local auto_snippets = {
   math_s("!=", t "\\neq "),
   math_s("**", t "\\times "),
   math_s("ooo", t "\\infty"),
+  math_s("sig", t "\\sigma"),
+  math_s("Sig", t "\\Sigma"),
+  math_s("The", t "\\Theta"),
+  math_s("tau", t "\\tau"),
+  math_s("vert", t "\\vert"),
+  math_s("Vert", t "\\Vert"),
   math_s({trig = "mll", wordTrig = false}, {t("_{"),i(1), t("}")}),
   math_s({trig = "muu", wordTrig = false}, {t("^{"),i(1), t("}")}),
   math_s(

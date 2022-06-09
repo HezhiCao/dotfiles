@@ -44,14 +44,29 @@ local snippets = {
     fmta(
       [[
       {{$%align%
-      <> &= <> \\
-      &= <>
+      <> & \begin{cases}= <> \\
+      & <> \\
+      \end{cases}
       }}$
       ]],
       {
         i(1),
         i(2),
         i(3),
+      }
+    )
+  ),
+  s("mce", 
+    fmta(
+      [[
+      {{$
+      \begin{gather*}
+      <>
+      \end{gather*}
+      }}$
+      ]],
+      {
+        i(1),
       }
     )
   ),
