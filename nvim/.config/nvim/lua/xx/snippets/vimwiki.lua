@@ -44,8 +44,8 @@ local snippets = {
     fmta(
       [[
       {{$%align%
-      <> & \begin{cases}= <> \\
-      & <> \\
+      <> = \begin{cases} &<> &<>\\
+      & <> &<>\\
       \end{cases}
       }}$
       ]],
@@ -53,6 +53,8 @@ local snippets = {
         i(1),
         i(2),
         i(3),
+        i(4),
+        i(5),
       }
     )
   ),

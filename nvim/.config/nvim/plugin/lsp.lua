@@ -152,7 +152,8 @@ local servers = {
   hls = true,
   cmake = true,
   dockerls = true,
-  ltex = require "xx.lsp.ltex",
+  -- ltex = require "xx.lsp.ltex",
+  ltex = true,
 }
 
 local setup_server = function(server_name, config)
