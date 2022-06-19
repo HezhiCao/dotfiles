@@ -7,6 +7,7 @@ if [[ ! -x "$(command -v stow)" ]]; then
     exit 1
 fi
 
+mv .zshrc ~
 mkdir -p ~/.config/gtk-3.0
 mkdir -p ~/.config/zsh
 mkdir -p ~/.config/zsh-st
