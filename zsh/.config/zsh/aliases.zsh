@@ -6,7 +6,7 @@ alias kittyconf="nvim ~/.config/kitty/kitty.conf"
 alias alaconf="nvim ~/.config/alacritty/alacritty.yml"
 alias pch="proxychains4 -q"
 alias lg="lazygit"
-alias setp='export http_proxy="http://127.0.0.1:2340"; export https_proxy="http://127.0.0.1:2340"'
+alias setp='export http_proxy="http://127.0.0.1:7890"; export https_proxy="http://127.0.0.1:7890"'
 alias usetp='unset http_proxy; unset https_proxy'
 alias aptli='apt list --installed --verbose 2> /dev/null | tail --lines +2 | sed -n "/\[.*\]/{s/\/.*//; N; s/\n/^/p}" | column -t -s^ | fzf --multi'
 alias disable-peda='sed -i "s/^source.*peda\.py$/# &/" ~/.gdbinit'

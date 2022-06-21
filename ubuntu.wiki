@@ -1,0 +1,35 @@
+== git ==
+ssh-keygen -r rsa -C "1024274335@qq.com"
+
+== shell ==
+sudo apt install zsh
+chsh /bin/zsh
+git clone --depth 1 git@github.com:HezhiCao/dotfiles.git
+cd dotfiles & ./setup.sh
+
+git clone --depth 1 https://github.com/neovim/neovim.git
+mkdir -p .local/share/nvim/site/pack/packer/start
+cd .local/share/nvim/site/pack/packer/start
+git clone https://github.com/wbthomason/packer.nvim.git
+
+sudo apt install gnome-shell-extension
+sudo apt install deconf-editor
+
+== nvidia driver ==
+sudo apt search nvidia-driver
+sudo apt install nvidia-driver-510
+装cuda, cudnn
+
+== 源 ==
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+sudo vim /etc/apt/sources.list
+
+./Anaconda3-2022.05-Linux-x86_64.sh 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+vim .condarc
+
+== 输入法 ==
+sudo apt install fcitx5-qt fcitx5-gtk fcitx5-configtool fcitx5-chinese-addons
+sudo apt install ./sogoupinyin_4.0.1.2123_amd64.deb
+vim .pm_enviroment
+

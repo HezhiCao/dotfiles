@@ -60,6 +60,7 @@ require("telescope").setup {
         ["co_scan"] = vim.env.HOME .. "/Projects/sem_co_scan_ws",
         ["voxblox"] = vim.env.HOME .. "/Projects/voxblox_plusplus_ws",
         ["habitat"] = vim.env.HOME .. "/Programming_Learning/habitat_learning",
+        ["code"] = vim.env.HOME .. "/Documents/code",
         ["note"] = vim.env.HOME .. "/Documents/Notes",
         ["wiki"] = vim.env.HOME .. "/Documents/Vimwiki/wiki",
       },
