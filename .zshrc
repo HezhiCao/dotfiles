@@ -94,7 +94,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # ------------------
 
 ZDOTDIR=${HOME}/.config/zsh
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+ZIM_HOME=${HOME}/.zim
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   if (( ${+commands[curl]} )); then
@@ -106,7 +106,7 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   fi
 fi
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${HOME}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 # Initialize modules.
@@ -165,3 +165,7 @@ unset __conda_setup
 # source ./.bash_profile
 source $ZDOTDIR/.zshrc
 
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory

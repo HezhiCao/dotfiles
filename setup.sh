@@ -110,6 +110,47 @@ elif [[ -x "$(command -v pacman)" ]]; then
     if [[ ${#pacman_pack[@]} -ge 1 ]]; then
         sudo pacman -S ${pacman_pack[*]}
     fi
+elif [[ -x "$(command -v apt)" ]]; then
+    declare -A apt_pack
+    # apt_pack[lazygit]=lazygit
+    # apt_pack[delta]=git-delta
+    # apt_pack[clang-format]=clang
+    # apt_pack[clangd]=clang
+    apt_pack[cppcheck]=cppcheck
+    apt_pack[shellcheck]=shellcheck
+    apt_pack[rg]=ripgrep
+    apt_pack[fd]=fd-find
+    apt_pack[xdotool]=xdotool
+    apt_pack[gdb]=gdb
+    apt_pack[valgrind]=valgrind
+    # apt_pack[duf]=duf
+    # apt_pack[gdu]=gdu
+    # apt_pack[exa]=exa
+    # apt_pack[tldr]=tealdeer
+    # apt_pack[bat]=bat
+    apt_pack[procs]=procs
+    apt_pack[cpulimit]=cpulimit
+    # apt_pack[tokei]=tokei
+    apt_pack[atool]=atool
+    apt_pack[xclip]=xclip
+    apt_pack[btm]=bottom
+    apt_pack[fzf]=fzf
+    apt_pack[sql]=libsqlite3-dev
+    apt_pack[tmux]=tmux
+    apt_pack[python]=python3
+    apt_pack[pip3]=pip3
+
+    for exec_name in "${!apt_pack[@]}"; do
+        if ! command -v $exec_name &> /dev/null; then
+            sudo apt install ${apt_pack[$exec_name]}
+        fi
+    done
 else
     echo "Please first install homebrew manually!"
+fi
+
+if [[ -x "$(command -v pip3)" ]]; then
+    pip3 install pynvim
+elif [[ -x "$(command -v pip)" ]]; then 
+    pip install pynvim
 fi
