@@ -16,29 +16,41 @@ require("nvim-dap-virtual-text").setup()
 require("xx.dap." .. vim.bo.filetype)
 
 local keymap_restore = {}
-dap.listeners.after["event_initialized"]["xx"] = function()
-  for _, buf in pairs(api.nvim_list_bufs()) do
-    local keymaps = api.nvim_buf_get_keymap(buf, "n")
-    for _, keymap in ipairs(keymaps) do
-      if keymap.lhs == "K" then
-        table.insert(keymap_restore, keymap)
-        api.nvim_buf_del_keymap(buf, "n", "K")
+dap.listeners.after["event_initialized"]["xx"] = function(session)
+  if vim.tbl_isempty(keymap_restore) then
+    for _, buf in pairs(api.nvim_list_bufs()) do
+      local keymaps = api.nvim_buf_get_keymap(buf, "n")
+      for _, keymap in ipairs(keymaps) do
+        if keymap.lhs == "K" then
+          table.insert(keymap_restore, keymap)
+          api.nvim_buf_del_keymap(buf, "n", "K")
+        end
       end
     end
+    if session.capabilities.supportsEvaluateForHovers then
+      vim.keymap.set({ "n", "v" }, "K", require("dapui").eval, { silent = true })
+    else
+      vim.keymap.set({ "n", "v" }, "K", function()
+        require("dapui").eval(nil, { context = "watch" })
+      end, {
+        silent = true,
+      })
+    end
   end
-  vim.keymap.set({"n", "v"}, "K", require('dapui').eval, { silent = true })
 end
 
 local close_post_hook = function()
   for _, keymap in ipairs(keymap_restore) do
-    vim.keymap.set(
-      keymap.mode,
-      keymap.lhs,
-      keymap.rhs or keymap.callback,
-      { noremap = keymap.noremap == 1, silent = keymap_restore.silent == 1, buffer = keymap.buffer }
-    )
+    if api.nvim_buf_is_valid(keymap.buffer) then
+      vim.keymap.set(
+        keymap.mode,
+        keymap.lhs,
+        keymap.rhs or keymap.callback,
+        { noremap = keymap.noremap == 1, silent = keymap_restore.silent == 1, buffer = keymap.buffer }
+      )
+    end
   end
-  vim.F.npcall(vim.keymap.del, {"n", "v"}, "K")
+  vim.F.npcall(vim.keymap.del, { "n", "v" }, "K")
   keymap_restore = {}
   dap.repl.close()
   require("xx.utils").delete_finished_terminal_buffers()
@@ -58,11 +70,7 @@ function M.set_debug_args()
   local default = vim.g[dap_args] and table.concat(vim.g[dap_args], " ") or ""
   vim.g[dap_args] = vim.split(vim.fn.input("Program arguments: ", default, "file"), " ")
   for i = 1, #dap.configurations[ft] do
-    dap.configurations[ft][i] = vim.tbl_extend(
-      "force",
-      dap.configurations[ft][i],
-      { args = vim.g[dap_args] }
-    )
+    dap.configurations[ft][i] = vim.tbl_extend("force", dap.configurations[ft][i], { args = vim.g[dap_args] })
   end
 end
 

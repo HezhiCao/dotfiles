@@ -1,3 +1,26 @@
+local keymap_opts = { silent = true }
+
+vim.keymap.set('n', 'n', function()
+  local ok, result = pcall(vim.cmd, "normal! " .. vim.v.count1 .. 'n')
+  if not ok then
+    vim.cmd(string.format("echo '%s'", string.match(result, "E%d+: .*$")))
+  end
+  require("hlslens").start()
+end, keymap_opts)
+
+vim.keymap.set('n', 'N', function()
+  local ok, result = pcall(vim.cmd, "normal! " .. vim.v.count1 .. 'N')
+  if not ok then
+    vim.cmd(string.format("echo '%s'", string.match(result, "E%d+: .*$")))
+  end
+  require("hlslens").start()
+end, keymap_opts)
+
+vim.keymap.set('n', '*', [[*<cmd>lua require('hlslens').start()<cr>]], keymap_opts)
+vim.keymap.set('n', '#', [[#<cmd>lua require('hlslens').start()<cr>]], keymap_opts)
+vim.keymap.set('n', 'g*', [[g*<cmd>lua require('hlslens').start()<cr>]], keymap_opts)
+vim.keymap.set('n', 'g#', [[g#<cmd>lua require('hlslens').start()<cr>]], keymap_opts)
+
 local success, wk = pcall(require, 'which-key')
 
 if not success then

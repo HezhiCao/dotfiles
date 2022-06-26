@@ -30,10 +30,20 @@ require('dapui').setup({
     -- Use a table to apply multiple mappings
     expand = { '<CR>', '<Tab>', '<2-LeftMouse>' },
   },
-  sidebar = {
-    open_on_start = false,
-  },
-  tray = {
-    open_on_start = false,
-  },
+  layouts = {
+    {
+      elements = {
+        "stacks",
+        "breakpoints",
+        "watches",
+      },
+      size = 50,
+      position = "left",
+    },
+    {
+      elements = { "scopes" },
+      size = 20,
+      position = "bottom",
+    },
+  }
 })
