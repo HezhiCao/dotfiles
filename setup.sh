@@ -18,6 +18,7 @@ mkdir -p ~/.local/bin
 ln -sf "$dotfiles_dir/.bashrc" ~/
 ln -sf "$dotfiles_dir/.inputrc" ~/
 ln -sf "$dotfiles_dir/.editrc" ~/
+ln -sf "$dotfiles_dir/.clang-format" ~/
 
 stow --target="$HOME" nvim/
 stow --target="$HOME" zsh/

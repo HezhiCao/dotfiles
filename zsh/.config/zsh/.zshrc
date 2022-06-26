@@ -134,3 +134,5 @@ source $HOME/.config/zsh/completions.zsh
 source $HOME/.config/zsh/aliases.zsh
 source $HOME/.config/zsh/fzf.zsh
 source $HOME/.config/zsh/opts.zsh
+
+export RANGER_ZLUA=${ZIM_HOME}/modules/z.lua

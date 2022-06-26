@@ -81,6 +81,7 @@ local auto_snippets = {
   -- math_s("Vert", t "\\Vert"),
   math_s({trig = "mll", wordTrig = false}, {t("_{"),i(1), t("}")}),
   math_s({trig = "muu", wordTrig = false}, {t("^{"),i(1), t("}")}),
+  math_s({trig = "cases", wordTrig = false}, {t("\\begin{cases} "),i(1), t("\\end{cases}")}),
   math_s(
     "sq",
     fmta(

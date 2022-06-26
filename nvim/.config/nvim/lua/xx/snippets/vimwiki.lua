@@ -73,6 +73,8 @@ local snippets = {
     )
   ),
   s("nll", t "<br>"),
+  s("nnl", t "<br>"),
+  s("ostar", t "$\\color{orange} \\bigstar$"),
   math_s({trig = "mqa", wordTrig = false}, {
     t("\\quad "),
   }),
