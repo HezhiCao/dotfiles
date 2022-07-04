@@ -69,12 +69,14 @@ end
 function M.VISUAL(default)
   default = default or ""
   return f(function(_, snip)
-    if #snip.env.SELECT_DEDENT ~= 0 then
+    if snip.env and #snip.env.SELECT_DEDENT ~= 0 then
       return snip.env.SELECT_DEDENT
+    elseif snip.parent and snip.parent.env and #snip.parent.env.SELECT_DEDENT ~= 0 then
+      return snip.parent.env.SELECT_DEDENT
     else
       return default
     end
-  end, {})
+  end)
 end
 
 function M.line_begin(trigger)

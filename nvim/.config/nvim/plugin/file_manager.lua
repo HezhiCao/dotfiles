@@ -73,6 +73,19 @@ require("neo-tree").setup {
           state.commands["open"](state)
         end
       end,
+      ["a"] = function(state)
+        local node = state.tree:get_node()
+        if state.current_position == "current" and not node:is_expanded() and node:has_children() then
+          local fs_actions = require("neo-tree.sources.filesystem.lib.fs_actions")
+          local parent_id = node:get_parent_id()
+          fs_actions.create_node(parent_id, nil, parent_id)
+        else
+          state.commands["add"](state)
+        end
+      end,
+      ["d"] = "none",
+      ["df"] = "delete",
+      ["dd"] = "cut_to_clipboard",
       ["s"] = "none",
       ["S"] = "none",
       ["c"] = "none",
@@ -250,19 +263,19 @@ wk.register({
     },
     h = { "<cmd>edit %:h<cr>", "Edit current file's directory" },
   },
-  ra = { "<cmd>RnvimrToggle<cr>", "Ranger" },
+  lf = { "<cmd>Lf<cr>", "Lf" },
 }, {
   prefix = "<leader>",
 })
 
 -- rnvimr
 -- Make Ranger replace netrw and be the file explorer
-vim.g.rnvimr_enable_ex = false
-vim.g.rnvimr_layout = {
-  relative = "editor",
-  width = math.ceil(0.8 * vim.o.columns),
-  height = math.ceil(0.8 * vim.o.lines),
-  col = math.floor(0.1 * vim.o.columns),
-  row = math.floor(0.1 * vim.o.lines),
-  style = "minimal",
-}
+-- vim.g.rnvimr_enable_ex = false
+-- vim.g.rnvimr_layout = {
+--   relative = "editor",
+--   width = math.ceil(0.8 * vim.o.columns),
+--   height = math.ceil(0.8 * vim.o.lines),
+--   col = math.floor(0.1 * vim.o.columns),
+--   row = math.floor(0.1 * vim.o.lines),
+--   style = "minimal",
+-- }

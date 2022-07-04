@@ -22,13 +22,7 @@ alias jbf="j -b -I"
 alias jh="j -I -t ."
 alias jc="j -c"
 alias dt="gio trash"
-
-# alias l='exa -lbF'
-# alias ls='ls'
-# alias ll='exa -la'
-# alias lx='exa -lbhmua@'
-
-
+alias lf="lf-ueberzug"
 if [[ -x "$(command -v exa)" ]]; then
     alias l="exa --icons"
     alias ll='exa -la'
@@ -63,6 +57,16 @@ ra() {
 racd() {
     tmp="$(mktemp /tmp/ranger-cd.XXXXXX)"
     ranger --choosedir="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$PWD" ] && cd "$dir"
+    fi
+}
+
+lfcd() {
+    tmp="$(mktemp /tmp/lf-cd.XXXXXX)"
+    lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp"

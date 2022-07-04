@@ -66,7 +66,7 @@ return require("packer").startup {
     use { "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }
     use "lewis6991/gitsigns.nvim"
     use "samoshkin/vim-mergetool"
-    use { "kdheepak/lazygit.nvim", cmd = "LazyGit" }
+    -- use { "kdheepak/lazygit.nvim", cmd = "LazyGit" }
 
     ---
     --- Filesystem
@@ -84,7 +84,23 @@ return require("packer").startup {
         },
       },
     }
-    use "kevinhwang91/rnvimr"
+    -- use "kevinhwang91/rnvimr"
+    use {
+      "is0n/fm-nvim",
+      cmd = { "Lazygit", "Lf" },
+      config = function()
+        require("fm-nvim").setup {
+          ui = {
+            float = {
+              border = "rounded",
+              border_hl = "TelescopeBorder",
+              height = 0.9,
+              width = 0.9,
+            },
+          },
+        }
+      end,
+    }
 
     ---
     --- Colorscheme & Icons
@@ -275,7 +291,7 @@ return require("packer").startup {
     ---
     --- Rust
     ---
-    use "simrat39/rust-tools.nvim"
+    use { "againxx/rust-tools.nvim", branch = "fix/inlay-hints" }
     use { -- managing crates.io dependencies
       "saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },
@@ -377,6 +393,13 @@ return require("packer").startup {
       },
     }
     use "jbyuki/nabla.nvim" -- visualize latex as ascii symbols
+    use {
+      "askfiy/nvim-picgo",
+      cmd = { "UploadClipboard", "UploadImagefile" },
+      config = function()
+        require("nvim-picgo").setup {}
+      end,
+    }
 
     ---
     --- Task system
@@ -473,12 +496,12 @@ return require("packer").startup {
     use { "szw/vim-maximizer", cmd = "MaximizerToggle" }
     use "jeffkreeftmeijer/vim-numbertoggle"
     -- embed neovim in browser input box
-    use {
-      "glacambre/firenvim",
-      run = function()
-        vim.fn["firenvim#install"](0)
-      end,
-    }
+    -- use {
+    --   "glacambre/firenvim",
+    --   run = function()
+    --     vim.fn["firenvim#install"](0)
+    --   end,
+    -- }
     use "voldikss/vim-translator"
     use "chentoast/marks.nvim"
     use {
