@@ -42,11 +42,13 @@ map gm $lf -remote "send $id cd /media/$USER"
 map gi cd ~/Git_Repo
 map gM cd /mnt
 map gs cd /srv
-map gp cd /tmp
+map gt cd /tmp
 map gr cd /
 map g/ cd /
 map g? cd /usr/share/doc/ranger
 map gp cd ~/Projects
+map gP cd ~/Programming_Learning
+map gc cd ~/Documents/code
 map gj zlua
 
 map i $lf-ueberzug-previewer $f

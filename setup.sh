@@ -32,6 +32,7 @@ stow --target="$HOME" kitty/
 stow --target="$HOME" gtk/
 stow --target="$HOME" tldr/
 stow --target="$HOME" ranger/
+stow --target="$HOME" lf/
 
 ln -sf "$dotfiles_dir/python_scripts/unzip_cn.py" ~/.local/bin/unzip_cn
 
