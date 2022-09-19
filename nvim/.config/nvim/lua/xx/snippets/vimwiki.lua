@@ -78,6 +78,11 @@ local snippets = {
   math_s({trig = "mqa", wordTrig = false}, {
     t("\\quad "),
   }),
+  math_s({trig = "c", wordTrig = false}, {
+    t("{\\scriptstyle \\enclose{circle}{\\kern .06em "),
+    i(1),
+    t(" \\kern .06em}}")
+  }),
   s("$",
   fmta(
       [[

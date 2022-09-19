@@ -39,6 +39,7 @@ map go cd /opt
 map gv cd ~/dotfiles/nvim/.config/nvim/
 map gV cd /var
 map gm $lf -remote "send $id cd /media/$USER"
+map gn cd ~/Documents/Nutstore/
 map gi cd ~/Git_Repo
 map gM cd /mnt
 map gs cd /srv
