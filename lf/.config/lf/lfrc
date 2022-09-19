@@ -38,7 +38,6 @@ map gL cd -r %f
 map go cd /opt
 map gv cd ~/dotfiles/nvim/.config/nvim/
 map gV cd /var
-map gm $lf -remote "send $id cd /media/$USER"
 map gn cd ~/Documents/Nutstore/
 map gi cd ~/Git_Repo
 map gM cd /mnt
@@ -79,6 +78,8 @@ map bg &set_wallpaper $f
 # execute current file (must be executable)
 map x $$f
 map X !$f
+
+map <c-f> :fzf_jump
 
 # dedicated keys for file opener actions
 map o &mimeopen $f
@@ -206,4 +207,16 @@ cmd bulk-rename ${{
     done
     rm -- "$old" "$new"
     lf -remote "send $id unselect"
+}}
+
+cmd fzf_jump ${{
+    res="$(fd -HI | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
 }}

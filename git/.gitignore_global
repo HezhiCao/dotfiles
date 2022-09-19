@@ -24,6 +24,7 @@ compile_commands.json
 
 # clangd
 .cache/
+.clangd
 
 # clang-tidy
 .clang-tidy
@@ -31,3 +32,6 @@ compile_commands.json
 # gdb
 .gdb_history
 peda-session*
+
+# pdc
+.container_name

@@ -1,8 +1,8 @@
 vim.cmd [[packadd packer.nvim]]
 
-if vim.fn.has("mac") then
+if vim.fn.has "mac" then
   require("packer").init {
-    max_jobs = 60
+    max_jobs = 60,
   }
 end
 
@@ -39,15 +39,22 @@ return require("packer").startup {
     use {
       "simrat39/symbols-outline.nvim",
       cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+      config = function()
+        require("symbols-outline").setup {
+          width = 35,
+          auto_preview = false,
+          preview_bg_highlight = "NormalFloat",
+          keymaps = { -- These keymaps can be a string or a table for multiple keys
+            toggle_preview = "p",
+          },
+        }
+      end,
     }
     use "j-hui/fidget.nvim" -- UI for lsp progress
     use {
       "filipdutescu/renamer.nvim",
       branch = "master",
       requires = { { "nvim-lua/plenary.nvim" } },
-      config = function()
-        require("renamer").setup {}
-      end,
     }
 
     ---
@@ -297,7 +304,7 @@ return require("packer").startup {
     ---
     --- Rust
     ---
-    use { "againxx/rust-tools.nvim", branch = "fix/inlay-hints" }
+    use "simrat39/rust-tools.nvim"
     use { -- managing crates.io dependencies
       "saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },
@@ -510,6 +517,7 @@ return require("packer").startup {
     -- }
     use "voldikss/vim-translator"
     use "chentoast/marks.nvim"
+    use "ThePrimeagen/harpoon"
     use {
       "AckslD/nvim-neoclip.lua",
       module = "neoclip",

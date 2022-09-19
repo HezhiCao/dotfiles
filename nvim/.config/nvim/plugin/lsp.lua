@@ -83,7 +83,7 @@ local on_attach_default = function(client, bufnr)
     hint_prefix = "🐯 ",
   }
 
-  keymap.set("n", "K", show_documentation, { silent = true , buffer = bufnr})
+  keymap.set("n", "K", show_documentation, { silent = true, buffer = bufnr })
 
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.modified_formatexpr()")
@@ -112,7 +112,17 @@ local on_attach_default = function(client, bufnr)
   wk.register({
     r = {
       n = { "<cmd>lua require('renamer').rename()<cr>", "Rename symbol" },
-      f = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format the whole file" },
+      f = {
+        function()
+          -- neovim 0.8
+          if vim.lsp.buf.format then
+            vim.lsp.buf.format { async = true }
+          else
+            vim.lsp.buf.formatting()
+          end
+        end,
+        "Format the whole file",
+      },
     },
     d = {
       g = { "<cmd>lua require('xx.telescope').diagnostics{bufnr = 0}<cr>", "Current buffer diagnostics" },
@@ -233,11 +243,6 @@ for server_name, config in pairs(servers) do
   setup_server(server_name, config)
 end
 
-vim.g.symbols_outline = {
-  width = 35,
-  preview_bg_highlight = "NormalFloat",
-}
-
 require("fidget").setup {
   text = {
     spinner = "moon",
@@ -250,50 +255,19 @@ require("fidget").setup {
   },
 }
 
--- https://github.com/tami5/lspsaga.nvim/issues/89
--- local last_cursor_move
---
--- function UpdateCurosrMoveTime()
---   last_cursor_move = vim.loop.now()
--- end
---
--- function AutoHover()
---   local hover = require "lspsaga.hover"
---   vim.loop.new_timer():start(
---     2000,
---     0,
---     vim.schedule_wrap(function()
---       if not hover.has_saga_hover() and vim.loop.now() - last_cursor_move > 2000 then
---         hover.render_hover_doc()
---       end
---     end)
---   )
--- end
---
-
--- _G.auto_hover = true
--- _G.last_cursor_moved = vim.loop.now()
--- function AutoHover()
---   -- don't bother if mode isn't normal and auto hover is disabled.
---   if vim.fn.mode() ~= "n" or not _G.auto_hover then
---     return
---   end
---
---   local timer = vim.loop.new_timer()
---   local job = function()
---     -- if should ignore or mode is no longer normal. ignore
---     if vim.loop.now() - last_cursor_moved < 3000 or vim.fn.mode() ~= "n" then
---       return
---     end
---     local hover = require "lspsaga.hover"
---     if not hover.has_saga_hover() then
---       hover.render_hover_doc()
---     end
---   end
---
---   -- Start the timer job
---   timer:start(3000, 0, vim.schedule_wrap(job))
--- end
---
--- vim.cmd "autocmd CursorMoved <buffer> lua last_cursor_moved = vim.loop.now()"
--- vim.cmd "autocmd CursorHold <buffer> lua AutoHover()"
+require("renamer").setup {
+  mappings = {
+    ["<M-h>"] = function()
+      vim.api.nvim_input "<left>"
+    end,
+    ["<M-l>"] = function()
+      vim.api.nvim_input "<right>"
+    end,
+    ["<C-b>"] = function()
+      require("renamer.mappings.utils").set_cursor_to_start()
+    end,
+    ["<C-e>"] = function()
+      require("renamer.mappings.utils").set_cursor_to_end()
+    end,
+  },
+}

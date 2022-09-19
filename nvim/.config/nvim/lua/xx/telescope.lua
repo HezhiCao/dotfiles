@@ -40,6 +40,9 @@ require("telescope").setup {
         preview_width = 0.65,
       },
     },
+    path_display = {
+      truncate = 1,
+    },
   },
   extensions = {
     fzf_writer = {
@@ -302,6 +305,10 @@ end
 
 function M.grep_prompt()
   require("telescope.builtin").grep_string {
+    layout_strategy = "vertical",
+    layout_config = {
+      prompt_position = "top",
+    },
     path_display = {
       shorten = 1,
     },
@@ -311,6 +318,10 @@ end
 
 function M.grep_cursor_word()
   require("telescope.builtin").grep_string {
+    layout_strategy = "vertical",
+    layout_config = {
+      prompt_position = "top",
+    },
     path_display = {
       shorten = 1,
     },
@@ -335,9 +346,17 @@ function M.grep_last_search(opts)
   require("telescope.builtin").grep_string(opts)
 end
 
--- function M.live_grep()
---   require('telescope').extensions.fzf_writer.staged_grep()
--- end
+function M.live_grep()
+  require("telescope.builtin").live_grep {
+    layout_strategy = "vertical",
+    layout_config = {
+      prompt_position = "top",
+    },
+    path_display = {
+      shorten = 2,
+    },
+  }
+end
 
 function M.luasnip()
   require("telescope").extensions.luasnip.luasnip {
@@ -408,6 +427,16 @@ function M.lsp_range_code_actions()
     },
   }
   require("telescope.builtin").lsp_range_code_actions(opts)
+end
+
+function M.harpoon_marks()
+  local opts = require("telescope.themes").get_dropdown {
+    layout_config = {
+      height = 20,
+      width = 0.8,
+    },
+  }
+  require("telescope").extensions.harpoon.marks(opts)
 end
 
 return M
