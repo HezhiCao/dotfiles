@@ -372,7 +372,7 @@ return require("packer").startup {
             ["core.norg.dirman"] = {
               config = {
                 workspaces = {
-                  wiki = "~/Documents/Vimwiki/neorg",
+                  wiki = "~/Documents/nutstore/Vimwiki/neorg",
                 },
               },
             },

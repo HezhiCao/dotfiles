@@ -1,10 +1,10 @@
 vim.g.vimwiki_global_ext = 0
 vim.g.vimwiki_list = {
   {
-    path = '~/Documents/Vimwiki/wiki',
+    path = '~/Documents/nutstore/Vimwiki/wiki',
     css_name = 'css/style.css',
-    path_html = '~/Documents/Vimwiki/html',
-    template_path = '~/Documents/Vimwiki/template',
+    path_html = '~/Documents/nutstore/Vimwiki/html',
+    template_path = '~/Documents/nutstore/Vimwiki/template',
     syntax = 'default',
     ext = '.wiki',
     links_space_char = '_',

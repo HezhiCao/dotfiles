@@ -119,6 +119,9 @@ source $HOME/.config/zsh/extra_fpath.zsh
 # Initialize modules
 # ------------------
 
+if [ ! -v ZIM_HOME ]; then
+    source $HOME/.zshrc
+fi
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   # Update static initialization script if it does not exist or it's outdated, before sourcing it
     source ${ZIM_HOME}/zimfw.zsh init -q

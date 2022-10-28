@@ -12,6 +12,8 @@ fi
 
 if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
     . "$HOME/anaconda3/etc/profile.d/conda.sh"
+elif [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
 
 if [ -z "$ROS_ROOT" ] && command -v conda &> /dev/null; then

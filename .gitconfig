@@ -1,14 +1,15 @@
 [user]
-    name = inshallahzz
-    email = 1024274335@qq.com
+	name = inshallahzz
+	email = 1024274335@qq.com
 [core]
     pager = delta
-    # editor = nvim
     excludesfile = ~/.gitignore_global
 [http]
-    proxy = http://127.0.0.1:7890
+	#proxy = socks5://127.0.0.1:7891
+	proxy = http://127.0.0.1:7890
 [https]
-    proxy = http://127.0.0.1:7890
+	#proxy = socks5://127.0.0.1:7891
+	proxy = http://127.0.0.1:7890
 [init]
     defaultBranch = main
 # define command which will be used when "nvim" is set as a merge tool

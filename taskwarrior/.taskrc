@@ -23,12 +23,12 @@ editor=nvim
 weekstart=Monday
 
 # Server
-taskd.certificate=~/Documents/tasks/ustc-1314.cert.pem
-taskd.key=~/Documents/tasks/ustc-1314.key.pem
-taskd.ca=~/Documents/tasks/ustc-1314.ca.pem
-taskd.server=8.130.28.126:53589
-taskd.credentials=Againxx/Xi Xia/26f5a7ed-8bd0-4314-9de8-0c8ea08f4677
-taskd.trust=ignore hostname
+# taskd.certificate=~/Documents/tasks/ustc-1314.cert.pem
+# taskd.key=~/Documents/tasks/ustc-1314.key.pem
+# taskd.ca=~/Documents/tasks/ustc-1314.ca.pem
+# taskd.server=8.130.28.126:53589
+# taskd.credentials=Againxx/Xi Xia/26f5a7ed-8bd0-4314-9de8-0c8ea08f4677
+# taskd.trust=ignore hostname
 
 # Reports
 report.vit.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description.count,urgency
@@ -63,4 +63,5 @@ alias.open=execute taskopen $@
 #include /home/linuxbrew/.linuxbrew/Cellar/task/2.5.1/share/doc/task/rc/solarized-dark-256.theme
 #include /home/linuxbrew/.linuxbrew/Cellar/task/2.5.1/share/doc/task/rc/solarized-light-256.theme
 include ~/Documents/tasks/ayu.theme
-include ~/Documents/tasks/local.taskrc
+# include ~/Documents/tasks/local.taskrc
+news.version=2.6.0

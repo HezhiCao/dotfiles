@@ -36,14 +36,14 @@ map gD cd /dev
 map gl cd -r .
 map gL cd -r %f
 map go cd /opt
-map gv cd ~/dotfiles/nvim/.config/nvim/
+map gv cd ~/dotfiles/nvim/.config/nvim
 map gV cd /var
-map gn cd ~/Documents/Nutstore/
+map gn cd ~/Documents/nutstore
 map gi cd ~/Git_Repo
 map gM cd /mnt
 map gs cd /srv
 map gt cd /tmp
-map gr cd /
+map gr cd ~/Documents/code/results
 map g/ cd /
 map g? cd /usr/share/doc/ranger
 map gp cd ~/Projects

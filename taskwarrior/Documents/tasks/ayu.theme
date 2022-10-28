@@ -32,7 +32,7 @@ rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,sc
 # General decoration
 color.label=
 color.label.sort=
-color.alternate=on black
+color.alternate=on gray2
 color.header=color4
 color.footnote=color3
 color.warning=bold red
@@ -54,7 +54,7 @@ color.project.none=
 color.project.Scanbot=color13
 color.project.SemCoScan=color14
 color.project.Note=color11
-color.project.Inbox=color232
+# color.project.Inbox=color232
 
 # Priority
 color.uda.priority.H=color5

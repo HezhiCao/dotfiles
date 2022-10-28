@@ -22,6 +22,8 @@ alias jbf="j -b -I"
 alias jh="j -I -t ."
 alias jc="j -c"
 alias dt="gio trash"
+alias fd="fdfind"
+alias tldr="tealdeer"
 alias lf="lf-ueberzug"
 if [[ -x "$(command -v exa)" ]]; then
     alias l="exa --icons"

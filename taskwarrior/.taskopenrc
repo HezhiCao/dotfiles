@@ -36,7 +36,7 @@ NOTES_EXT=".txt"
 
 # Add some paths to the taskopen's PATH variable
 #PATH_EXT=/path/to/taskopen/scripts
-PATH_EXT=/home/ustc-1314/.local/share/taskopen/scripts
+PATH_EXT=$HOME/.local/share/taskopen/scripts
 
 # Regular expression that referes to the NOTES_FILE.
 # Default is: Notes

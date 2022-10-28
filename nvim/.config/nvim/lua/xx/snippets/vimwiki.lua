@@ -23,6 +23,8 @@ local snippets = {
 
       === What were the key elements of the approach? ===
 
+      === What is the merits and demerits of the method? ===
+
       === What can you use for yourself? ===
 
       === What other references do you want to follow? ===

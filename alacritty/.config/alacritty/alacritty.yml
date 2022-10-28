@@ -114,7 +114,8 @@ font:
     #   - (Windows) Consolas
     # family: InconsolataLGC Nerd Font
     # family: FiraCode Nerd Font
-    family: VictorMono Nerd Font
+    # family: VictorMono Nerd Font
+    family: Hack Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -333,7 +334,9 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+# background_opacity: 0.9
+window:
+  opacity: 0.6
 
 #selection:
   # This string contains all characters that are used as separators for

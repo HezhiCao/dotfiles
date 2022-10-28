@@ -114,10 +114,10 @@ elif [[ -x "$(command -v pacman)" ]]; then
     fi
 elif [[ -x "$(command -v apt)" ]]; then
     declare -A apt_pack
-    # apt_pack[lazygit]=lazygit
-    # apt_pack[delta]=git-delta
-    # apt_pack[clang-format]=clang
-    # apt_pack[clangd]=clang
+    apt_pack[lazygit]=lazygit
+    apt_pack[delta]=git-delta
+    apt_pack[clang-format]=clang
+    apt_pack[clangd]=clang
     apt_pack[cppcheck]=cppcheck
     apt_pack[shellcheck]=shellcheck
     apt_pack[rg]=ripgrep
@@ -125,14 +125,14 @@ elif [[ -x "$(command -v apt)" ]]; then
     apt_pack[xdotool]=xdotool
     apt_pack[gdb]=gdb
     apt_pack[valgrind]=valgrind
-    # apt_pack[duf]=duf
-    # apt_pack[gdu]=gdu
-    # apt_pack[exa]=exa
-    # apt_pack[tldr]=tealdeer
-    # apt_pack[bat]=bat
+    apt_pack[duf]=duf
+    apt_pack[gdu]=gdu
+    apt_pack[exa]=exa
+    apt_pack[tldr]=tealdeer
+    apt_pack[bat]=bat
     apt_pack[procs]=procs
     apt_pack[cpulimit]=cpulimit
-    # apt_pack[tokei]=tokei
+    apt_pack[tokei]=tokei
     apt_pack[atool]=atool
     apt_pack[xclip]=xclip
     apt_pack[btm]=bottom
@@ -141,6 +141,8 @@ elif [[ -x "$(command -v apt)" ]]; then
     apt_pack[tmux]=tmux
     apt_pack[python]=python3
     apt_pack[pip3]=pip3
+    apt_pack[taskwarrior]=taskwarrior
+    apt_pack[cargo]=cargo
 
     for exec_name in "${!apt_pack[@]}"; do
         if ! command -v $exec_name &> /dev/null; then

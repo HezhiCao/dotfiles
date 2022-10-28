@@ -112,6 +112,7 @@ nnoremap <C-w>l <Cmd>rightbelow vsplit<CR>
 nnoremap <C-w>h <Cmd>leftabove vsplit<CR>
 nnoremap <C-w>j <Cmd>rightbelow split<CR>
 nnoremap <C-w>k <Cmd>leftabove split<CR>
+nnoremap <C-w>z <Cmd>MaximizerToggle!<CR>
 nnoremap <C-w><C-l> <Cmd>rightbelow vsplit<CR>
 nnoremap <C-w><C-h> <Cmd>leftabove vsplit<CR>
 nnoremap <C-w><C-j> <Cmd>rightbelow split<CR>
