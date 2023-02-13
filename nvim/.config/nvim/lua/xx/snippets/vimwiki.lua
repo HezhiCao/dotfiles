@@ -11,16 +11,17 @@ local snippets = {
       :paper_reading:
 
       == First Pass: Title / Abstract / Figures ==
+      *Task*: 
+      *Character*: 
 
       == Second Pass: Introduction / Conclusion / Figures again / Skim the rest ==
+      === Method ===
 
       == Third Pass: Read the paper but skip / skim the math ==
 
       == Fourth Pass: Read the whole thing but skip the parts that don't make sense ==
 
       == Questions ==
-      === What did the authors try to accomplish? ===
-
       === What were the key elements of the approach? ===
 
       === What is the merits and demerits of the method? ===
