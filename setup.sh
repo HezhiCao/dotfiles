@@ -7,7 +7,6 @@ if [[ ! -x "$(command -v stow)" ]]; then
     exit 1
 fi
 
-mv .zshrc ~
 mkdir -p ~/.config/gtk-3.0
 mkdir -p ~/.config/zsh
 mkdir -p ~/.config/zsh-st
@@ -20,6 +19,7 @@ ln -sf "$dotfiles_dir/.inputrc" ~/
 ln -sf "$dotfiles_dir/.editrc" ~/
 ln -sf "$dotfiles_dir/.clang-format" ~/
 
+cp .zshrc $HOME
 stow --target="$HOME" nvim/
 stow --target="$HOME" zsh/
 stow --target="$HOME" tmux/

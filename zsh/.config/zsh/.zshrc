@@ -1,10 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -z $source_home && -f $HOME/.zshrc ]]; then
+    source $HOME/.zshrc
 fi
-
 #
 # User configuration sourced by interactive shells
 #
@@ -127,15 +126,53 @@ source $HOME/.config/zsh/extra_fpath.zsh
 # ------------------
 # Initialize modules
 # ------------------
+source $HOME/.config/zsh/.zshenv
+source $HOME/.config/zsh/.zprofile
 
-if [ ! -v ZIM_HOME ]; then
-    source $HOME/.zshrc
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+      if [[ $(pgrep clash) ]]; then
+            curl -fsSL -x 127.0.0.1:7890 --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+                https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+        else:
+            echo "Please launch clash first"
+            curl -fsSL  --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+                https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+      fi
+
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
+
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   # Update static initialization script if it does not exist or it's outdated, before sourcing it
     source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 source ${ZIM_HOME}/init.zsh
+
+zmodload -F zsh/terminfo +p:terminfo
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+# }}} End configuration added by Zim install
+
+# Use powerline
+USE_POWERLINE="true"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
+
 
 # ------------------------------
 # Post-init module configuration

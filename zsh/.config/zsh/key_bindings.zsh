@@ -23,9 +23,9 @@ fi
 # bindkey ctrl+l for complete accept zsh-autosuggestions
 # bindkey alt+l for clear screen
 bindkey -M viins "^J" forward-word
-bindkey -M viins "^L" autosuggest-accept
+# bindkey -M viins "^L" autosuggest-accept
 bindkey -M viins "^B" beginning-of-line
-bindkey -M viins "^[l" clear-screen
+bindkey -M viins "^L" clear-screen
 bindkey -M viins "^[." insert-last-word
 
 zle -N fzf-choose-dirs-widget
