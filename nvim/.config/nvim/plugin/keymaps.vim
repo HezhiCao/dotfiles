@@ -53,6 +53,7 @@ nnoremap <C-l> :nohlsearch<CR>:<C-r>=has('diff')?'diffupdate':''<CR><CR>:syntax 
 
 " Fast normal mode
 noremap <M-n> :normal!<Space>
+" nmap <C-m> :set filetype=markdown | MarkdownPreview<CR>
 
 " Fast substitute
 nnoremap <M-s> :%s/

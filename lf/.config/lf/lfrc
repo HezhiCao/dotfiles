@@ -42,6 +42,7 @@ map gn cd ~/Documents/nutstore
 map gi cd ~/Git_Repo
 map gM cd /mnt
 map gs cd /srv
+map gS cd ~/Pictures/Screenshots/
 map gt cd /tmp
 map gr cd ~/Documents/code/results
 map g/ cd /

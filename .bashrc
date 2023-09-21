@@ -144,3 +144,13 @@ unset __conda_setup
 exec /usr/bin/zsh
 
 export PATH=/home/inshallah/.meteor:$PATH
+lfcd () {
+        tmp="$(mktemp /tmp/lf-cd.XXXXXX)"
+        lf -last-dir-path="$tmp" "$@"
+        if [ -f "$tmp" ]
+        then
+                dir="$(cat "$tmp")"
+                rm -f "$tmp"
+                [ -d "$dir" ] && [ "$dir" != "$PWD" ] && cd "$dir"
+        fi
+}

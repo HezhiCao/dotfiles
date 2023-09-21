@@ -11,13 +11,26 @@ local snippets = {
       :paper_reading:
 
       == First Pass: Title / Abstract / Figures ==
-      *Task*: 
-      *Character*: 
+      ==== Key idea ====
+
+      ==== Key problem ====
+
+      ==== Key challenge ====
+
+      ==== Key method ====
 
       == Second Pass: Introduction / Conclusion / Figures again / Skim the rest ==
-      === Method ===
+      === Introduction ===
+
+      ==== Research gap ====
+
+      ==== Key insight ====
+
+      ==== Technical contributions ====
 
       == Third Pass: Read the paper but skip / skim the math ==
+      === Method ===
+      {{{{|name|style="width:750px;margin:00 00px;"}}}} <br>
 
       == Fourth Pass: Read the whole thing but skip the parts that don't make sense ==
 
